@@ -174,6 +174,22 @@
         transform: translateY(0);
       }
 
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar {
+        width: 10px;
+      }
+      ::-webkit-scrollbar-track {
+        background: var(--secondary-color);
+      }
+      ::-webkit-scrollbar-thumb {
+        background-color: var(--primary-color);
+        border-radius: 20px;
+        border: 2px solid var(--secondary-color);
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background-color: var(--accent-color);
+      }
+
       /* Mobile-specific fixes */
       @media (max-width: 767px) {
         .parallax-hero {
@@ -215,35 +231,35 @@
           <i class="fas fa-bars"></i>
         </button>
       </div>
-      <!-- Mobile Menu -->
+      <!-- Mobile Menu (Sidebar) -->
       <div
         id="mobile-menu"
-        class="md:hidden bg-white/95 backdrop-blur-sm w-full absolute left-0 top-full shadow-lg"
+        class="md:hidden bg-[var(--secondary-color)] w-full absolute left-0 top-full shadow-lg"
       >
         <a
           href="#about"
-          class="block text-center py-3 text-gray-800 hover:bg-gray-100"
+          class="block text-center py-4 text-gray-800 hover:bg-[var(--accent-color)] hover:text-white transition-colors duration-300"
           >Om Oss</a
         >
         <a
           href="#services"
-          class="block text-center py-3 text-gray-800 hover:bg-gray-100"
+          class="block text-center py-4 text-gray-800 hover:bg-[var(--accent-color)] hover:text-white transition-colors duration-300"
           >Tjenester</a
         >
         <a
           href="#opening-hours"
-          class="block text-center py-3 text-gray-800 hover:bg-gray-100"
+          class="block text-center py-4 text-gray-800 hover:bg-[var(--accent-color)] hover:text-white transition-colors duration-300"
           >Åpningstider</a
         >
         <a
           href="#contact"
-          class="block text-center py-3 text-gray-800 hover:bg-gray-100"
+          class="block text-center py-4 text-gray-800 hover:bg-[var(--accent-color)] hover:text-white transition-colors duration-300"
           >Kontakt</a
         >
         <a
           href="https://timma.no/salong/hans-og-hennes-harcenter"
           target="_blank"
-          class="block text-center py-4 bg-[var(--primary-color)] text-white font-bold"
+          class="block text-center py-4 bg-[var(--primary-color)] text-white font-bold mt-2"
           >Bestill Time</a
         >
       </div>
@@ -289,7 +305,7 @@
             <div class="rounded-lg shadow-2xl overflow-hidden">
               <img
                 src="https://scaled-images.timma.fi/timma/image/upload/w_1080,c_limit,q_auto/v1673530175/c/hans-og-hennes-h-rcenter-2750d6d0-927d-11ed-a2d0-472a478a1bdf.jpg"
-                alt="Salon Interior"
+                alt="Elegant and modern interior of Hans & Hennes Hårcenter"
                 class="w-full h-auto object-cover parallax-element"
                 data-speed="-0.1"
               />
@@ -421,7 +437,7 @@
             <div class="rounded-lg shadow-2xl overflow-hidden h-full">
               <img
                 src="https://scaled-images.timma.fi/timma/image/upload/w_1080,c_limit,q_auto/v1673531607/c/hans-og-hennes-h-rcenter-7d237ba0-9280-11ed-a3dd-f327e04fb259.jpg"
-                alt="Scissors and comb"
+                alt="Hairdressing tools, scissors and comb"
                 class="w-full h-full object-cover parallax-element"
                 data-speed="-0.1"
               />
@@ -509,24 +525,27 @@
     >
       <div class="container mx-auto px-6 text-center">
         <h3 class="text-2xl font-serif text-[var(--primary-color)] mb-4">
-          Hans & Hennes Hårcenter
+          Hans og Hennes Hårcenter.
         </h3>
-        <p class="mb-4">Langgata 41, 4306 Sandnes</p>
-        <div class="flex justify-center space-x-6 text-2xl mb-6">
+        <p class="mb-6">Langgata 41, 4306 Sandnes</p>
+        <div class="flex justify-center space-x-6 text-2xl mb-8">
           <a
             href="#"
-            class="hover:text-[var(--primary-color)] transition-colors"
+            class="text-gray-500 hover:text-[var(--primary-color)] transition-colors duration-300"
             ><i class="fab fa-facebook-f"></i
           ></a>
           <a
             href="#"
-            class="hover:text-[var(--primary-color)] transition-colors"
+            class="text-gray-500 hover:text-[var(--primary-color)] transition-colors duration-300"
             ><i class="fab fa-instagram"></i
           ></a>
         </div>
-        <p class="text-sm text-gray-500">
-          &copy; <span id="year"></span> Hans og Hennes Hårcenter. Alle
-          rettigheter reservert.
+        <p class="text-sm text-gray-400">
+          &copy; <span id="year"></span>
+          <span class="font-medium text-[var(--primary-color)]"
+            >Hans og Hennes Hårcenter.</span
+          >
+          Alle rettigheter reservert.
         </p>
       </div>
     </footer>
