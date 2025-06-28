@@ -5,10 +5,8 @@ import {
   onSnapshot,
 } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-// Make sure the entire webpage is loaded before we try to run any code.
 document.addEventListener("DOMContentLoaded", () => {
   // --- YOUR FIREBASE CONFIGURATION ---
-  // This is the connection to your Firebase project.
   const firebaseConfig = {
     apiKey: "AIzaSyDyLOvvcqH9ZqrYl0uWYLKXl9czRvbtD0o",
     authDomain: "hans-hennes-harcenter.firebaseapp.com",
@@ -16,6 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
     storageBucket: "hans-hennes-harcenter.appspot.com",
     messagingSenderId: "766588486231",
     appId: "1:766588486231:web:90439e599e0633e7c25912",
+    measurementId: "G-L0TVKB7K55",
   };
 
   // --- Initialize Firebase and Firestore ---
@@ -23,7 +22,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const db = getFirestore(app);
 
   // --- Fetch and Display Salon Information ---
-  // This listens for any changes in your database and updates the website in real-time.
   const salonInfoRef = doc(db, "salonInfo", "details");
   onSnapshot(salonInfoRef, (doc) => {
     if (doc.exists()) {
@@ -33,7 +31,6 @@ document.addEventListener("DOMContentLoaded", () => {
       console.log(
         "No data found in Firestore! Please save data from the admin page."
       );
-      // Optionally, you can display a default message on the page
       displayDefaultContent();
     }
   });
@@ -60,23 +57,35 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const openingHoursList = document.getElementById("opening-hours-list");
-    if (openingHoursList) {
+    if (openingHoursList && data.hours) {
+      // ** THIS IS THE CORRECTED LOGIC **
+      const formatHours = (day) => {
+        const h = data.hours[day];
+        if (!h || h.open === "Stengt" || !h.open) return "Stengt";
+        return `${h.open} - ${h.close}`;
+      };
       openingHoursList.innerHTML = `
-                <div class="flex justify-between border-b border-gray-300 pb-2"><span>Mandag</span> <span>${
-                  data.hours.monday || "..."
-                }</span></div>
-                <div class="flex justify-between border-b border-gray-300 pb-2"><span>Tirsdag - Torsdag</span> <span class="font-bold">${
-                  data.hours.tuesdayThursday || "..."
-                }</span></div>
-                <div class="flex justify-between border-b border-gray-300 pb-2"><span>Fredag</span> <span>${
-                  data.hours.friday || "..."
-                }</span></div>
-                <div class="flex justify-between border-b border-gray-300 pb-2"><span>Lørdag</span> <span>${
-                  data.hours.saturday || "..."
-                }</span></div>
-                <div class="flex justify-between"><span>Søndag</span> <span>${
-                  data.hours.sunday || "..."
-                }</span></div>
+                <div class="flex justify-between border-b border-gray-300 pb-2"><span>Mandag</span> <span>${formatHours(
+                  "monday"
+                )}</span></div>
+                <div class="flex justify-between border-b border-gray-300 pb-2"><span>Tirsdag</span> <span class="font-bold">${formatHours(
+                  "tuesday"
+                )}</span></div>
+                <div class="flex justify-between border-b border-gray-300 pb-2"><span>Onsdag</span> <span class="font-bold">${formatHours(
+                  "wednesday"
+                )}</span></div>
+                <div class="flex justify-between border-b border-gray-300 pb-2"><span>Torsdag</span> <span class="font-bold">${formatHours(
+                  "thursday"
+                )}</span></div>
+                <div class="flex justify-between border-b border-gray-300 pb-2"><span>Fredag</span> <span>${formatHours(
+                  "friday"
+                )}</span></div>
+                <div class="flex justify-between border-b border-gray-300 pb-2"><span>Lørdag</span> <span>${formatHours(
+                  "saturday"
+                )}</span></div>
+                <div class="flex justify-between"><span>Søndag</span> <span>${formatHours(
+                  "sunday"
+                )}</span></div>
             `;
     }
 
@@ -99,15 +108,11 @@ document.addEventListener("DOMContentLoaded", () => {
     if (footerAddress) footerAddress.textContent = "";
   }
 
-  // --- All other UI scripts from the original file ---
-
-  // Footer: Automatically update the copyright year
   const yearElement = document.getElementById("year");
   if (yearElement) {
     yearElement.textContent = new Date().getFullYear();
   }
 
-  // Mobile Menu: Make the hamburger button work
   const mobileMenuButton = document.getElementById("mobile-menu-button");
   const mobileMenu = document.getElementById("mobile-menu");
   if (mobileMenuButton && mobileMenu) {
@@ -117,7 +122,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Mobile Menu: Close the menu when a link is clicked
   const mobileMenuLinks = document.querySelectorAll("#mobile-menu a");
   mobileMenuLinks.forEach((link) => {
     link.addEventListener("click", () => {
@@ -127,7 +131,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Header: Change style when the user scrolls
   const header = document.getElementById("header");
   if (header) {
     window.addEventListener("scroll", () => {
@@ -139,7 +142,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Scroll Animations: Fade in elements as they appear
   const elementsToAnimate = document.querySelectorAll(".animated-element");
   const scrollObserver = new IntersectionObserver(
     (entries) => {
@@ -159,7 +161,6 @@ document.addEventListener("DOMContentLoaded", () => {
     scrollObserver.observe(element);
   });
 
-  // Parallax Effect: Make images move at a different speed
   const parallaxImages = document.querySelectorAll(".parallax-element");
   const applyParallaxEffect = () => {
     if (window.innerWidth > 767) {

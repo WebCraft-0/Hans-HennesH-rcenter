@@ -77,6 +77,24 @@ body {
      transform: scale(1.05);
 }
 
+.btn-accent {
+    display: inline-block;
+    background-color: var(--accent-color);
+    color: white !important;
+    font-weight: 600;
+    padding: 0.5rem 1.5rem;
+    border-radius: 9999px;
+    transition: all 0.3s ease-in-out;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+}
+.btn-accent:hover {
+    background-color: var(--primary-color);
+    transform: scale(1.05);
+}
+
+
 /* -- SERVICE CARDS -- */
 .service-card:hover .service-icon {
      transform: scale(1.1) rotate(-10deg);
@@ -181,30 +199,256 @@ body {
 }
 
 /* -- ADMIN PAGE STYLES -- */
-#admin-view fieldset {
-    border-color: #e5e7eb;
-}
-#admin-view label {
-    color: #374151;
-}
-#admin-view input {
+.admin-input {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
     transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    background-color: #ffffff;
 }
-#admin-view input:focus {
+.admin-input:focus {
     border-color: var(--primary-color);
     box-shadow: 0 0 0 2px rgba(217, 169, 169, 0.4);
     outline: none;
+}
+.tab-button {
+    padding: 0.5rem 1rem;
+    border-bottom: 3px solid transparent;
+    font-weight: 600;
+    color: #6b7280;
+    transition: all 0.2s;
+}
+.tab-button:hover {
+    color: var(--text-color);
+}
+.tab-button.active-tab {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+/* Fancy Admin Time Selectors */
+.time-select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-color: #f9fafb;
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    padding: 0.5rem 2.5rem 0.5rem 0.75rem;
+    font-weight: 500;
+    width: 100%;
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 0.5rem center;
+    background-repeat: no-repeat;
+    background-size: 1.5em 1.5em;
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+.time-select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(217, 169, 169, 0.4);
+    outline: none;
+}
+
+/* Booking Toggle Switch */
+.toggle-bg {
+    width: 3.5rem;
+    height: 1.75rem;
+    background-color: #e5e7eb;
+    border-radius: 9999px;
+    transition-property: background-color;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 300ms;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+.toggle-bg::after {
+    content: 'AV';
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    color: #6b7280;
+    position: absolute;
+    top: 50%;
+    right: 7px;
+    transform: translateY(-50%);
+    transition: all 0.3s ease-in-out;
+}
+.toggle-dot {
+    width: 1.25rem;
+    height: 1.25rem;
+    background-color: #ffffff;
+    border-radius: 9999px;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    position: absolute;
+    top: 0.25rem;
+    left: 0.25rem;
+    transition-property: transform;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 300ms;
+}
+.toggle-checkbox:checked + .toggle-bg {
+    background-color: var(--primary-color);
+}
+.toggle-checkbox:checked + .toggle-bg::after {
+    content: 'PÅ';
+    color: white;
+    left: 7px;
+    right: auto;
+}
+.toggle-checkbox:checked + .toggle-bg .toggle-dot {
+    transform: translateX(1.75rem);
+}
+
+/* -- APPOINTMENT CARD STYLES -- */
+.appointment-card {
+    background-color: #f9fafb; /* bg-gray-50 */
+    padding: 1rem;
+    border-radius: 0.75rem; /* rounded-xl */
+    border: 1px solid #f3f4f6; /* border-gray-100 */
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+}
+.appointment-details {
+    flex-grow: 1;
+}
+.appointment-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.5rem;
+    flex-shrink: 0;
+}
+.appointment-actions button {
+    font-size: 0.875rem;
+    font-weight: 600;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    border: 1px solid transparent;
+    transition: all 0.2s ease-in-out;
+}
+.appointment-actions .edit-appointment-btn {
+    color: #2563eb; /* text-blue-600 */
+    background-color: #dbeafe; /* bg-blue-100 */
+    border-color: #bfdbfe; /* border-blue-200 */
+}
+.appointment-actions .edit-appointment-btn:hover {
+    background-color: #bfdbfe;
+    color: #1d4ed8;
+}
+.appointment-actions .delete-appointment-btn {
+    color: #dc2626; /* text-red-600 */
+    background-color: #fee2e2; /* bg-red-100 */
+    border-color: #fecaca; /* border-red-200 */
+}
+.appointment-actions .delete-appointment-btn:hover {
+    background-color: #fecaca;
+    color: #b91c1c;
+}
+
+
+/* -- BOOKING PAGE STYLES (UPDATED) -- */
+.service-item {
+    background-color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    border-left: 5px solid transparent;
+}
+.service-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    border-color: var(--primary-color);
+}
+.service-item h3 {
+    font-weight: 700;
+    font-size: 1.125rem;
+}
+#calendar {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 0.5rem;
+}
+.calendar-day {
+    padding: 0.75rem 0.5rem;
+    border-radius: 0.5rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    border: 1px solid #e5e7eb;
+    font-weight: 500;
+}
+.calendar-day:hover:not(:disabled) {
+    background-color: var(--accent-color);
+    color: white;
+    border-color: var(--accent-color);
+}
+.calendar-day.selected {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+    transform: scale(1.05);
+}
+.calendar-day.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background-color: #f9fafb;
+}
+
+#slots-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(65px, 1fr));
+    gap: 0.5rem;
+}
+
+.time-slot {
+    background-color: #F8F7F4; /* Soft cream, same as body */
+    border: 1px solid #e5e7eb; /* Light gray border */
+    color: var(--text-color);
+    padding: 0.5rem;
+    border-radius: 0.375rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    font-weight: 500;
+}
+
+.time-slot:hover {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+    transform: scale(1.05);
 }
 
 
 /* -- RESPONSIVE / MOBILE-SPECIFIC FIXES -- */
 @media (max-width: 767px) {
     .parallax-hero {
-        background-attachment: scroll; /* Disables parallax on mobile for performance/layout */
-        min-height: 70vh; /* Reduces hero height on smaller screens */
+        background-attachment: scroll;
+        min-height: 70vh;
     }
     .parallax-hero-content {
         padding-top: 15vh;
         padding-bottom: 15vh;
+    }
+    #slots-container {
+        grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+    }
+    .appointment-card {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .appointment-actions {
+        flex-direction: row;
+        justify-content: flex-end;
+        margin-top: 0.75rem;
+        padding-top: 0.75rem;
+        border-top: 1px solid #e5e7eb;
     }
 }

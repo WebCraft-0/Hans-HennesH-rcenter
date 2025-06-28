@@ -3,13 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Admin - Hans og Hennes Hårcenter</title>
+    <title>Adminpanel - Hans og Hennes Hårcenter</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body class="bg-[var(--secondary-color)]">
-    <div id="login-view" class="flex items-center justify-center min-h-screen">
-      <div class="w-full max-w-md bg-white p-8 rounded-lg shadow-xl">
+    <!-- Login View -->
+    <div
+      id="login-view"
+      class="flex items-center justify-center min-h-screen p-4"
+    >
+      <div class="w-full max-w-md bg-white p-8 rounded-2xl shadow-xl">
         <h1
           class="text-3xl font-serif text-center text-[var(--primary-color)] mb-6"
         >
@@ -18,36 +22,29 @@
         <form id="login-form">
           <div class="mb-4">
             <label for="email" class="block text-gray-700 font-semibold mb-2"
-              >Email</label
+              >E-post</label
             >
-            <input
-              type="email"
-              id="email"
-              class="w-full p-3 border border-gray-300 rounded-lg"
-              required
-            />
+            <input type="email" id="email" class="admin-input" required />
           </div>
           <div class="mb-6">
             <label for="password" class="block text-gray-700 font-semibold mb-2"
-              >Password</label
+              >Passord</label
             >
-            <input
-              type="password"
-              id="password"
-              class="w-full p-3 border border-gray-300 rounded-lg"
-              required
-            />
+            <input type="password" id="password" class="admin-input" required />
           </div>
-          <button type="submit" class="w-full btn-primary">Logg Inn</button>
+          <button type="submit" class="w-full btn-primary !animation-none">
+            Logg Inn
+          </button>
           <p id="login-error" class="text-red-500 text-center mt-4"></p>
         </form>
       </div>
     </div>
 
+    <!-- Admin View -->
     <div id="admin-view" class="hidden container mx-auto p-4 md:p-8">
       <div class="flex justify-between items-center mb-8">
         <h1 class="text-4xl font-serif text-[var(--primary-color)]">
-          Edit Website Info
+          Adminpanel
         </h1>
         <button
           id="logout-btn"
@@ -57,113 +54,277 @@
         </button>
       </div>
 
-      <form id="edit-form" class="bg-white p-8 rounded-lg shadow-xl space-y-8">
-        <!-- Contact Information -->
-        <fieldset class="border p-4 rounded-lg">
-          <legend class="text-xl font-serif px-2">Kontaktinfo</legend>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
-            <div>
-              <label for="edit-phone" class="block font-semibold mb-1"
-                >Telefonnummer</label
-              >
-              <input
-                type="tel"
-                id="edit-phone"
-                class="w-full p-2 border border-gray-300 rounded"
-              />
-            </div>
-            <div>
-              <label for="edit-email" class="block font-semibold mb-1"
-                >Email</label
-              >
-              <input
-                type="email"
-                id="edit-email"
-                class="w-full p-2 border border-gray-300 rounded"
-              />
-            </div>
-            <div class="md:col-span-2">
-              <label for="edit-address" class="block font-semibold mb-1"
-                >Adresse</label
-              >
-              <input
-                type="text"
-                id="edit-address"
-                class="w-full p-2 border border-gray-300 rounded"
-              />
-            </div>
-          </div>
-        </fieldset>
+      <!-- Tab Navigation -->
+      <div class="mb-8 border-b border-gray-300">
+        <nav class="flex space-x-4 sm:space-x-8 -mb-px overflow-x-auto">
+          <button
+            data-tab="info"
+            class="tab-button active-tab whitespace-nowrap"
+          >
+            Nettside Info
+          </button>
+          <button data-tab="services" class="tab-button whitespace-nowrap">
+            Tjenester
+          </button>
+          <button data-tab="appointments" class="tab-button whitespace-nowrap">
+            Avtaler
+          </button>
+        </nav>
+      </div>
 
-        <!-- Opening Hours -->
-        <fieldset class="border p-4 rounded-lg">
-          <legend class="text-xl font-serif px-2">Åpningstider</legend>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
-            <div>
-              <label for="edit-hours-monday" class="block font-semibold mb-1"
-                >Mandag</label
-              >
-              <input
-                type="text"
-                id="edit-hours-monday"
-                class="w-full p-2 border border-gray-300 rounded"
-              />
+      <!-- Tab Content -->
+      <div id="info-tab" class="tab-content">
+        <form
+          id="edit-form"
+          class="bg-white p-6 sm:p-8 rounded-2xl shadow-xl space-y-8"
+        >
+          <fieldset class="border p-4 rounded-lg">
+            <legend class="text-xl font-serif px-2">Kontaktinfo</legend>
+            <p class="text-sm text-gray-500 px-2 mb-4">
+              Informasjonen som vises på forsiden.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+              <div>
+                <label for="edit-phone" class="block font-semibold mb-1"
+                  >Telefonnummer</label
+                ><input type="tel" id="edit-phone" class="admin-input" />
+              </div>
+              <div>
+                <label for="edit-email" class="block font-semibold mb-1"
+                  >E-post</label
+                ><input type="email" id="edit-email" class="admin-input" />
+              </div>
+              <div class="md:col-span-2">
+                <label for="edit-address" class="block font-semibold mb-1"
+                  >Adresse</label
+                ><input type="text" id="edit-address" class="admin-input" />
+              </div>
             </div>
-            <div>
-              <label for="edit-hours-tue-thu" class="block font-semibold mb-1"
-                >Tirsdag - Torsdag</label
-              >
-              <input
-                type="text"
-                id="edit-hours-tue-thu"
-                class="w-full p-2 border border-gray-300 rounded"
-              />
+          </fieldset>
+          <fieldset class="border p-4 rounded-lg">
+            <legend class="text-xl font-serif px-2">Åpningstider</legend>
+            <p class="text-sm text-gray-500 px-2 mb-4">
+              Sett åpningstidene for salongen. Dette styrer både visningen på
+              forsiden og tilgjengelige tider i bookingen.
+            </p>
+            <div id="hours-editor" class="space-y-4 mt-4">
+              <!-- Hours inputs will be generated by admin.js -->
             </div>
-            <div>
-              <label for="edit-hours-friday" class="block font-semibold mb-1"
-                >Fredag</label
-              >
-              <input
-                type="text"
-                id="edit-hours-friday"
-                class="w-full p-2 border border-gray-300 rounded"
-              />
+          </fieldset>
+          <fieldset class="border p-4 rounded-lg">
+            <legend class="text-xl font-serif px-2">
+              Booking Innstillinger
+            </legend>
+            <div class="space-y-6 mt-4">
+              <div class="flex items-center justify-between">
+                <div class="pr-4">
+                  <span class="font-semibold">Aktiver Online Booking</span>
+                  <p class="text-sm text-gray-500 mt-1">
+                    Skru av og på muligheten for kunder å bestille time via
+                    nettsiden.
+                  </p>
+                </div>
+                <label
+                  for="booking-enabled"
+                  class="flex items-center cursor-pointer"
+                >
+                  <div class="relative">
+                    <input
+                      type="checkbox"
+                      id="booking-enabled"
+                      class="sr-only toggle-checkbox"
+                    />
+                    <div class="toggle-bg">
+                      <div class="toggle-dot"></div>
+                    </div>
+                  </div>
+                </label>
+              </div>
+              <div class="border-t pt-6">
+                <label for="booking-lead-time" class="block font-semibold mb-1"
+                  >Minimum forhåndsbestilling (minutter)</label
+                >
+                <input
+                  type="number"
+                  id="booking-lead-time"
+                  class="admin-input w-full max-w-xs"
+                />
+                <p class="text-sm text-gray-500 mt-1">
+                  Hvor kort tid i forveien kan en kunde bestille? (F.eks. 30
+                  minutter).
+                </p>
+              </div>
             </div>
-            <div>
-              <label for="edit-hours-saturday" class="block font-semibold mb-1"
-                >Lørdag</label
-              >
-              <input
-                type="text"
-                id="edit-hours-saturday"
-                class="w-full p-2 border border-gray-300 rounded"
-              />
-            </div>
-            <div>
-              <label for="edit-hours-sunday" class="block font-semibold mb-1"
-                >Søndag</label
-              >
-              <input
-                type="text"
-                id="edit-hours-sunday"
-                class="w-full p-2 border border-gray-300 rounded"
-                placeholder="f.eks. 'Stengt'"
-              />
-            </div>
+          </fieldset>
+          <div class="text-right">
+            <button type="submit" class="btn-primary !animation-none">
+              Lagre Endringer
+            </button>
           </div>
-        </fieldset>
+        </form>
+      </div>
 
-        <div class="text-right">
-          <button type="submit" class="btn-primary">Lagre Endringer</button>
+      <div id="services-tab" class="tab-content hidden">
+        <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-xl">
+          <h2 class="text-2xl font-serif mb-2">Tjenesteliste</h2>
+          <p class="text-sm text-gray-500 mb-6">
+            Her kan du legge til, endre eller slette tjenestene som kundene kan
+            bestille.
+          </p>
+          <div id="services-list" class="space-y-4 mb-8">
+            <!-- Service items will be loaded here -->
+          </div>
+          <h2 class="text-2xl font-serif mb-2 border-t pt-6">
+            Legg til / Endre Tjeneste
+          </h2>
+          <form id="service-form" class="space-y-4">
+            <input type="hidden" id="service-id" />
+            <div>
+              <label for="service-name" class="block font-semibold"
+                >Navn på tjeneste</label
+              ><input
+                type="text"
+                id="service-name"
+                class="admin-input"
+                required
+              />
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label for="service-duration" class="block font-semibold"
+                  >Varighet (minutter)</label
+                ><input
+                  type="number"
+                  id="service-duration"
+                  class="admin-input"
+                  required
+                />
+              </div>
+              <div>
+                <label for="service-price" class="block font-semibold"
+                  >Pris (NOK)</label
+                ><input
+                  type="number"
+                  id="service-price"
+                  class="admin-input"
+                  required
+                />
+              </div>
+            </div>
+            <div class="text-right">
+              <button type="submit" class="btn-primary !animation-none">
+                Lagre Tjeneste
+              </button>
+              <button
+                type="button"
+                id="cancel-edit-btn"
+                class="font-semibold text-gray-600 hover:text-red-500 ml-4 hidden"
+              >
+                Avbryt
+              </button>
+            </div>
+          </form>
         </div>
-      </form>
+      </div>
+
+      <div id="appointments-tab" class="tab-content hidden">
+        <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-xl">
+          <h2 class="text-2xl font-serif mb-2">Kommende Avtaler</h2>
+          <p class="text-sm text-gray-500 mb-6">
+            En liste over alle fremtidige bestillinger sortert etter dato.
+          </p>
+          <div id="appointments-list" class="space-y-4">
+            <p>Ingen kommende avtaler.</p>
+          </div>
+        </div>
+      </div>
       <p
         id="save-success"
-        class="text-green-600 font-bold text-center mt-6"
+        class="text-green-600 font-bold text-center mt-6 hidden"
       ></p>
     </div>
 
-    <!-- Firebase SDK for Admin Page -->
+    <!-- Edit Appointment Modal -->
+    <div
+      id="edit-appointment-modal"
+      class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center p-4 z-50"
+    >
+      <div class="bg-white rounded-2xl shadow-xl p-8 w-full max-w-md space-y-4">
+        <h3 class="text-2xl font-serif mb-2 text-center">Endre avtale</h3>
+        <p class="text-center text-gray-600 -mt-2 mb-4">
+          Kunde: <strong id="modal-customer-name"></strong>
+        </p>
+        <input type="hidden" id="modal-appointment-id" />
+        <input type="hidden" id="modal-service-duration" />
+        <div>
+          <label for="modal-date" class="block font-semibold text-sm mb-1"
+            >Ny dato</label
+          >
+          <input type="date" id="modal-date" class="admin-input" />
+        </div>
+        <div>
+          <label for="modal-time" class="block font-semibold text-sm mb-1"
+            >Ny tid</label
+          >
+          <select id="modal-time" class="admin-input">
+            <option value="">Velg en dato først</option>
+          </select>
+          <p id="modal-time-loader" class="text-sm text-gray-500 mt-1 hidden">
+            Laster ledige tider...
+          </p>
+        </div>
+        <div class="mt-6 flex justify-end space-x-4">
+          <button
+            type="button"
+            id="modal-cancel-btn"
+            class="font-semibold text-gray-600 hover:text-red-500"
+          >
+            Avbryt
+          </button>
+          <button
+            type="button"
+            id="modal-save-btn"
+            class="btn-primary !animation-none !py-2 !px-6"
+          >
+            Lagre ny tid
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div
+      id="confirmation-modal"
+      class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center p-4 z-[60]"
+    >
+      <div
+        class="bg-white rounded-2xl shadow-xl p-8 w-full max-w-sm space-y-4 text-center"
+      >
+        <h3 id="confirmation-title" class="text-xl font-serif text-gray-800">
+          Er du sikker?
+        </h3>
+        <p id="confirmation-message" class="text-gray-600">
+          Denne handlingen kan ikke angres.
+        </p>
+        <div class="mt-6 flex justify-center space-x-4">
+          <button
+            type="button"
+            id="confirmation-cancel-btn"
+            class="font-semibold text-gray-600 hover:text-gray-800"
+          >
+            Avbryt
+          </button>
+          <button
+            type="button"
+            id="confirmation-confirm-btn"
+            class="bg-red-600 text-white font-bold py-2 px-6 rounded-full hover:bg-red-700 transition"
+          >
+            Slett
+          </button>
+        </div>
+      </div>
+    </div>
+
     <script type="module" src="admin.js"></script>
   </body>
 </html>
