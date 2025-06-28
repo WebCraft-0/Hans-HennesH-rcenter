@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="no">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin - Hans og Hennes Hårcenter</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="bg-[var(--secondary-color)]">
+    <div id="login-view" class="flex items-center justify-center min-h-screen">
+      <div class="w-full max-w-md bg-white p-8 rounded-lg shadow-xl">
+        <h1
+          class="text-3xl font-serif text-center text-[var(--primary-color)] mb-6"
+        >
+          Admin Login
+        </h1>
+        <form id="login-form">
+          <div class="mb-4">
+            <label for="email" class="block text-gray-700 font-semibold mb-2"
+              >Email</label
+            >
+            <input
+              type="email"
+              id="email"
+              class="w-full p-3 border border-gray-300 rounded-lg"
+              required
+            />
+          </div>
+          <div class="mb-6">
+            <label for="password" class="block text-gray-700 font-semibold mb-2"
+              >Password</label
+            >
+            <input
+              type="password"
+              id="password"
+              class="w-full p-3 border border-gray-300 rounded-lg"
+              required
+            />
+          </div>
+          <button type="submit" class="w-full btn-primary">Logg Inn</button>
+          <p id="login-error" class="text-red-500 text-center mt-4"></p>
+        </form>
+      </div>
+    </div>
+
+    <div id="admin-view" class="hidden container mx-auto p-4 md:p-8">
+      <div class="flex justify-between items-center mb-8">
+        <h1 class="text-4xl font-serif text-[var(--primary-color)]">
+          Edit Website Info
+        </h1>
+        <button
+          id="logout-btn"
+          class="font-semibold text-gray-600 hover:text-[var(--primary-color)]"
+        >
+          Logg Ut &rarr;
+        </button>
+      </div>
+
+      <form id="edit-form" class="bg-white p-8 rounded-lg shadow-xl space-y-8">
+        <!-- Contact Information -->
+        <fieldset class="border p-4 rounded-lg">
+          <legend class="text-xl font-serif px-2">Kontaktinfo</legend>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+            <div>
+              <label for="edit-phone" class="block font-semibold mb-1"
+                >Telefonnummer</label
+              >
+              <input
+                type="tel"
+                id="edit-phone"
+                class="w-full p-2 border border-gray-300 rounded"
+              />
+            </div>
+            <div>
+              <label for="edit-email" class="block font-semibold mb-1"
+                >Email</label
+              >
+              <input
+                type="email"
+                id="edit-email"
+                class="w-full p-2 border border-gray-300 rounded"
+              />
+            </div>
+            <div class="md:col-span-2">
+              <label for="edit-address" class="block font-semibold mb-1"
+                >Adresse</label
+              >
+              <input
+                type="text"
+                id="edit-address"
+                class="w-full p-2 border border-gray-300 rounded"
+              />
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- Opening Hours -->
+        <fieldset class="border p-4 rounded-lg">
+          <legend class="text-xl font-serif px-2">Åpningstider</legend>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+            <div>
+              <label for="edit-hours-monday" class="block font-semibold mb-1"
+                >Mandag</label
+              >
+              <input
+                type="text"
+                id="edit-hours-monday"
+                class="w-full p-2 border border-gray-300 rounded"
+              />
+            </div>
+            <div>
+              <label for="edit-hours-tue-thu" class="block font-semibold mb-1"
+                >Tirsdag - Torsdag</label
+              >
+              <input
+                type="text"
+                id="edit-hours-tue-thu"
+                class="w-full p-2 border border-gray-300 rounded"
+              />
+            </div>
+            <div>
+              <label for="edit-hours-friday" class="block font-semibold mb-1"
+                >Fredag</label
+              >
+              <input
+                type="text"
+                id="edit-hours-friday"
+                class="w-full p-2 border border-gray-300 rounded"
+              />
+            </div>
+            <div>
+              <label for="edit-hours-saturday" class="block font-semibold mb-1"
+                >Lørdag</label
+              >
+              <input
+                type="text"
+                id="edit-hours-saturday"
+                class="w-full p-2 border border-gray-300 rounded"
+              />
+            </div>
+            <div>
+              <label for="edit-hours-sunday" class="block font-semibold mb-1"
+                >Søndag</label
+              >
+              <input
+                type="text"
+                id="edit-hours-sunday"
+                class="w-full p-2 border border-gray-300 rounded"
+                placeholder="f.eks. 'Stengt'"
+              />
+            </div>
+          </div>
+        </fieldset>
+
+        <div class="text-right">
+          <button type="submit" class="btn-primary">Lagre Endringer</button>
+        </div>
+      </form>
+      <p
+        id="save-success"
+        class="text-green-600 font-bold text-center mt-6"
+      ></p>
+    </div>
+
+    <!-- Firebase SDK for Admin Page -->
+    <script type="module" src="admin.js"></script>
+  </body>
+</html>
