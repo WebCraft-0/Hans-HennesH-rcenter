@@ -278,3 +278,49 @@ select.admin-input:focus, .time-select:focus {
         border-top: 1px solid #e5e7eb;
     }
 }
+/* ----- NAVBAR SCROLL EFFECT ----- */
+#header {                    /* default (top of page) */
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+#header.header-scrolled {
+  background: rgba(248, 247, 244, 0.85);   /* soft-cream with alpha */
+  backdrop-filter: blur(8px);
+  color: var(--text-color);
+  box-shadow: 0 2px 6px rgb(0 0 0 / 0.15);
+}
+
+/* menu links + hamburger stay dark */
+#header.header-scrolled a:not(.btn):not(.logo),
+#header.header-scrolled i {
+  color: var(--text-color) !important;
+}
+
+/* NEW → make the brand name pink */
+#header.header-scrolled .logo {
+  color: var(--accent-color) !important;
+}
+
+/* NEW → keep/force the button in pink while scrolled */
+#header.header-scrolled .btn-primary {
+  background-color: var(--accent-color) !important;
+  border-color: var(--accent-color) !important;
+  color: #fff;               /* text stays white */
+}
+#header.header-scrolled .cta {
+  background-color: var(--accent-color) !important;
+  border-color:     var(--accent-color) !important;
+  color: #fff !important;          /* text stays white */
+}
+/* Mobile menu styles */
+#mobile-menu {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+}
+
+#mobile-menu.menu-open {
+    max-height: 500px; /* Or a value large enough to contain all menu items */
+    transition: max-height 0.3s ease-in;
+}
+
