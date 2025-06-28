@@ -31,7 +31,9 @@ body {
     background-attachment: fixed; /* Parallax effect */
     background-position: center;
     background-repeat: no-repeat;
-    background-size: cover;
+ background-size: contain; /* New: Ensures the whole image is visible */
+    background-position: center; /* Keep the image centered */
+    background-repeat: no-repeat; /* Prevent repeating if space is left */
     position: relative;
 }
 
