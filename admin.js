@@ -383,11 +383,12 @@ function listenForServices() {
 function renderServiceList(allServices) {
   servicesList.innerHTML = "";
   if (categoriesCache.length === 0) {
-    servicesList.innerHTML =
-      "<p>Ingen kategorier funnet. Legg til en kategori først.</p>";
+    // This case might show briefly on first load, it's okay.
     return;
   }
+
   const servicesByCategory = {};
+  // Initialize with all categories from cache to maintain order
   categoriesCache.forEach((cat) => {
     servicesByCategory[cat.name] = [];
   });
@@ -398,7 +399,7 @@ function renderServiceList(allServices) {
     if (servicesByCategory[categoryName]) {
       servicesByCategory[categoryName].push(service);
     } else {
-      servicesByCategory["Ukategorisert"].push(service);
+      servicesByCategory["Ukategorisert"].push(service); // Fallback for services with non-existent categories
     }
   });
 
@@ -725,14 +726,20 @@ function showConfirmationModal(title, message) {
     confirmationTitle.textContent = title;
     confirmationMessage.textContent = message;
     confirmationModal.style.display = "flex";
-    confirmationConfirmBtn.onclick = () => {
+    const confirmHandler = () => {
       confirmationModal.style.display = "none";
+      confirmationConfirmBtn.removeEventListener("click", confirmHandler);
+      confirmationCancelBtn.removeEventListener("click", cancelHandler);
       resolve(true);
     };
-    confirmationCancelBtn.onclick = () => {
+    const cancelHandler = () => {
       confirmationModal.style.display = "none";
+      confirmationConfirmBtn.removeEventListener("click", confirmHandler);
+      confirmationCancelBtn.removeEventListener("click", cancelHandler);
       resolve(false);
     };
+    confirmationConfirmBtn.addEventListener("click", confirmHandler);
+    confirmationCancelBtn.addEventListener("click", cancelHandler);
   });
 }
 
